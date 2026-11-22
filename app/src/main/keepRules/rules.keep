@@ -1,0 +1,26 @@
+# Add project specific R8 rules here.
+# AGP will combine all keep rule files in src/main/keepRules to pass to R8
+#
+# For more details, see
+#   https://d.android.com/r/tools/r8/keep-rules
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+# Structured-output types: the Anthropic SDK derives JSON schemas from these and Jackson
+# deserializes into them via reflection.
+-keep class com.askchat.rag.SearchPlan { *; }
+-keep class com.askchat.rag.Answer { *; }
+
+# Anthropic SDK + Jackson + JSON schema generator rely on reflection.
+-keep class com.anthropic.** { *; }
+-keep class com.openai.** { *; }
+# pdfbox-android loads fonts/resources reflectively.
+-keep class com.tom_roush.** { *; }
+-keep class com.fasterxml.jackson.** { *; }
+-keep class com.github.victools.** { *; }
+-keep class kotlin.Metadata { *; }
+-dontwarn **
